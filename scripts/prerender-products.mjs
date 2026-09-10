@@ -349,7 +349,7 @@ async function main() {
   console.log(`✅ ${count} fiche(s) produit prérendue(s) dans dist/prerendered/produit/…`);
   console.log(`✅ sitemap.xml généré (${categories.length} catégories, ${products.length} produits).`);
   console.log(`✅ robots.txt généré (Sitemap: ${ORIGIN}/sitemap.xml).`);
-  console.log('Docker + Nginx servent ces fichiers statiques aux robots (voir nginx/default.conf).');
+  console.log("L'hébergeur sert ces fichiers statiques aux robots d'aperçu (Vercel via vercel.json, ou Nginx).");
 }
 
 main().catch((err) => {
