@@ -2,6 +2,7 @@
  * Couche d'accès aux publicités (carrousel du hero) — Supabase.
  */
 import { supabase } from '@/integrations/supabase/client';
+import type { TablesUpdate } from '@/integrations/supabase/types';
 import { Promo, PromoInput } from '@/types/site';
 
 /**
@@ -69,7 +70,7 @@ export async function createPromo(input: PromoInput): Promise<unknown> {
 }
 
 export async function updatePromo(id: string, input: Partial<PromoInput>): Promise<unknown> {
-  const updateData: Record<string, unknown> = {};
+  const updateData: TablesUpdate<'promos'> = {};
   if (input.badge !== undefined) updateData.badge = input.badge;
   if (input.title !== undefined) updateData.title = input.title;
   if (input.subtitle !== undefined) updateData.subtitle = input.subtitle;

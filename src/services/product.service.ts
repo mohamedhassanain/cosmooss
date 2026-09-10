@@ -3,6 +3,7 @@
  * Les hooks React Query consomment ces fonctions — aucune logique Supabase dans les composants.
  */
 import { supabase } from '@/integrations/supabase/client';
+import type { TablesUpdate } from '@/integrations/supabase/types';
 import { Product, ProductImage } from '@/types/product';
 import { slugify } from '@/lib/utils';
 
@@ -341,7 +342,7 @@ export async function createProduct(formData: ProductFormData): Promise<unknown>
 
 export async function updateProduct(id: string, formData: Partial<ProductFormData>): Promise<unknown> {
   const { images, ...productData } = formData;
-  const updateData: Record<string, unknown> = {};
+  const updateData: TablesUpdate<'products'> = {};
   if (productData.name !== undefined) updateData.name = productData.name;
   if (productData.slug !== undefined) updateData.slug = productData.slug;
   if (productData.description !== undefined) updateData.description = productData.description || null;

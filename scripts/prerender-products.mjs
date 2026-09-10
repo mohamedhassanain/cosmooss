@@ -7,9 +7,12 @@
  * aucune requête supplémentaire pour les visiteurs) :
  *
  *   1. Fiches produit : un HTML statique PAR PRODUIT ACTIF dans
- *      dist/prerendered/produit/<slug>/index.html. Nginx le sert aux robots
- *      (Googlebot, facebookexternalhit, Twitterbot…) sur /produit/<slug> ;
- *      les navigateurs sont redirigés vers l'app par <meta http-equiv="refresh">.
+ *      dist/prerendered/produit/<slug>/index.html. L'hébergeur (Vercel via
+ *      vercel.json, ou Nginx) le sert aux robots d'aperçu social
+ *      (facebookexternalhit, Twitterbot, WhatsApp…) sur /produit/<slug>.
+ *      AUCUNE redirection meta refresh : les navigateurs ne reçoivent jamais ce
+ *      fichier (la réécriture ne cible que les User-Agents robots), et une
+ *      redirection vers la même URL ferait boucler les crawlers.
  *   2. sitemap.xml : URLs canoniques publiques (accueil, /produits, /contact,
  *      catégories, produits actifs) — jamais /admin, /auth, /checkout, ni
  *      URLs de filtres (recherche/tri/promo/pagination).
@@ -22,8 +25,9 @@
  *   SITE_ORIGIN=https://domaine-final.com \
  *   npm run prerender
  *
- * SITE_ORIGIN est OBLIGATOIRE (sitemap/canonicals/robots). À défaut, ce
- * script retombe sur l'origine de production documentée dans .env.example.
+ * SITE_ORIGIN : à défaut, ce script retombe sur l'origine de production
+ * documentée (DEFAULT_SITE_ORIGIN) — le build ne casse jamais pour une variable
+ * d'environnement manquante (déploiements Vercel, notamment les previews).
  */
 import { createClient } from '@supabase/supabase-js';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -44,13 +48,15 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 const DEFAULT_SITE_ORIGIN = 'https://cosmooss.com';
 
 const rawOrigin = process.env.SITE_ORIGIN || '';
-const ORIGIN = rawOrigin.replace(/\/+$/, '');
+let ORIGIN = rawOrigin.replace(/\/+$/, '');
 if (!ORIGIN) {
-  console.error(
-    '❌ SITE_ORIGIN est requis (ex: https://votre-domaine.com). ' +
-    'Valeur par défaut : ' + DEFAULT_SITE_ORIGIN
+  // Ne PAS casser le build si la variable est absente : l'origine de production
+  // documentée est la source unique de vérité SEO (sitemap, canonicals, OG).
+  console.warn(
+    `⚠️  SITE_ORIGIN absent — repli sur l'origine de production ${DEFAULT_SITE_ORIGIN}. ` +
+      "Définir SITE_ORIGIN dans l'environnement pour des URLs canoniques explicites."
   );
-  process.exit(1);
+  ORIGIN = DEFAULT_SITE_ORIGIN;
 }
 
 const SITE_NAME = 'Cosmooss';
@@ -211,13 +217,18 @@ function buildProductHtml(product) {
       .map((block) => `<script type="application/ld+json">${JSON.stringify(block)}</script>`)
       .join('\n    ')}
 
-    <!-- Redirection vers l'app React pour les navigateurs (les bots ignorent ce tag) -->
-    <meta http-equiv="refresh" content="0; url=${escapeHtml(url)}" />
+    <!-- PAS de <meta http-equiv="refresh"> ici : les navigateurs ne reçoivent
+         JAMAIS cette page (la réécriture Vercel ne cible que les User-Agents de
+         robots d'aperçu social). Rediriger vers la même URL ferait boucler les
+         crawlers qui suivent le meta refresh (Googlebot/Bingbot) → page non
+         indexable (boucle de redirection). -->
   </head>
   <body style="margin:0;font-family:system-ui,sans-serif;background:#fef8fa;color:#5b2333;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;">
     <div>
       <h1 style="font-size:1.25rem;margin-bottom:0.5rem;">${escapeHtml(product.name)}</h1>
+      ${product.brand ? `<p style="margin:0.25rem 0;color:#9d6b7a;font-size:0.9rem;">${escapeHtml(product.brand)}</p>` : ''}
       ${product.price != null ? `<p style="color:#9d6b7a;">${escapeHtml(Number(product.price).toLocaleString('fr-FR'))} DH</p>` : ''}
+      ${description ? `<p style="max-width:38rem;margin:0.75rem auto 0;color:#5b2333;font-size:0.9rem;">${escapeHtml(description)}</p>` : ''}
       <a href="${escapeHtml(url)}" style="display:inline-block;margin-top:1rem;background:#f0a0b8;color:#fff;padding:0.75rem 1.5rem;border-radius:9999px;text-decoration:none;font-weight:bold;">Voir le produit</a>
     </div>
   </body>

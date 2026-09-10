@@ -2,6 +2,7 @@
  * Couche d'accès aux données catégories & sous-catégories (Supabase).
  */
 import { supabase } from '@/integrations/supabase/client';
+import type { TablesUpdate } from '@/integrations/supabase/types';
 import { Category, Subcategory } from '@/types/product';
 import { slugify } from '@/lib/utils';
 
@@ -39,7 +40,7 @@ export async function updateCategory(
   id: string,
   input: Partial<CategoryInput>
 ): Promise<unknown> {
-  const updateData: Record<string, unknown> = {};
+  const updateData: TablesUpdate<'categories'> = {};
   if (input.name !== undefined) updateData.name = input.name;
   if (input.slug !== undefined) updateData.slug = input.slug;
   if (input.description !== undefined) updateData.description = input.description;

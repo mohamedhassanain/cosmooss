@@ -101,6 +101,10 @@ export type Database = {
           stock_quantity: number
           weight_grams: number | null
           brand: string | null
+          video_url: string | null
+          location_city: string | null
+          location_url: string | null
+          show_location: boolean
           created_at: string
           updated_at: string
         }
@@ -124,6 +128,10 @@ export type Database = {
           stock_quantity?: number
           weight_grams?: number | null
           brand?: string | null
+          video_url?: string | null
+          location_city?: string | null
+          location_url?: string | null
+          show_location?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -147,6 +155,10 @@ export type Database = {
           stock_quantity?: number
           weight_grams?: number | null
           brand?: string | null
+          video_url?: string | null
+          location_city?: string | null
+          location_url?: string | null
+          show_location?: boolean
           created_at?: string
           updated_at?: string
         }
