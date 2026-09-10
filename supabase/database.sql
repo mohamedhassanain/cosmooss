@@ -1,5 +1,5 @@
 -- =====================================================
--- KISSARIYA COSMÉTIQUES — Schéma complet
+-- COSMOOSS — Schéma complet
 -- Exécuter ce fichier dans l'éditeur SQL Supabase.
 -- TOUT le fichier est idempotent (rejouable sans erreur) :
 --   * tables : CREATE TABLE IF NOT EXISTS
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS public.contact_messages (
 
 CREATE TABLE IF NOT EXISTS public.site_settings (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  site_name TEXT NOT NULL DEFAULT 'Kissariya Cosmétiques',
+  site_name TEXT NOT NULL DEFAULT 'Cosmooss',
   site_description TEXT,
   whatsapp_number TEXT,
   phone_number TEXT,
@@ -448,8 +448,13 @@ ON CONFLICT DO NOTHING;
 -- site_settings est un singleton fonctionnel : ne le créer que si la table est vide.
 -- ON CONFLICT seul ne suffit pas ici car la table ne possède pas de clé unique métier.
 INSERT INTO public.site_settings (site_name, whatsapp_number, hero_title, hero_subtitle, promo_enabled, promo_badge, promo_title, promo_subtitle, promo_link)
-SELECT 'Kissariya Cosmétiques', '+212600000000', 'Votre Beauté, Notre Passion', 'Découvrez notre sélection de cosmétiques naturels et bio au Maroc', true, 'PROMO DU MOMENT', 'Jusqu''à -50%', 'Sur une sélection de cosmétiques naturels & bio', '/produits?promotions=true'
+SELECT 'Cosmooss', '+212600000000', 'Votre Beauté, Notre Passion', 'Découvrez notre sélection de cosmétiques naturels et bio au Maroc', true, 'PROMO DU MOMENT', 'Jusqu''à -50%', 'Sur une sélection de cosmétiques naturels & bio', '/produits?promotions=true'
 WHERE NOT EXISTS (SELECT 1 FROM public.site_settings);
+
+-- Migration idempotente : renomme l'ancienne marque sur les bases déjà déployées.
+UPDATE public.site_settings
+SET site_name = 'Cosmooss'
+WHERE site_name = 'Kissariya Cosmétiques';
 
 INSERT INTO public.categories (name, slug, description, sort_order) VALUES
 ('Soins Visage', 'soins-visage', 'Crèmes, sérums, nettoyants et masques pour le visage', 1),

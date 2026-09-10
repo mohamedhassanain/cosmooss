@@ -94,9 +94,9 @@ export default function Auth() {
             <div className="mx-auto w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mb-4 shadow-lg">
               <Store className="h-8 w-8 text-primary-foreground" />
             </div>
-            <CardTitle className="text-2xl font-display">CatalogueMaroc</CardTitle>
+            <CardTitle className="text-2xl font-display">Cosmooss</CardTitle>
             <CardDescription>
-              Créez et partagez votre kissariya de produits
+              Votre boutique de cosmétiques naturels & bio au Maroc
             </CardDescription>
           </CardHeader>
 

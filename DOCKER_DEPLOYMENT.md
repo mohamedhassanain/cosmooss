@@ -1,4 +1,4 @@
-# DOCKER DEPLOYMENT — KISSARIYA COSMÉTIQUES
+# DOCKER DEPLOYMENT — COSMOOSS
 
 Production deployment guide for the Docker + Nginx frontend build.
 Architecture stays unchanged: **Users → CDN (Cloudflare) → Docker/Nginx → Supabase**.
@@ -18,7 +18,7 @@ in Docker.
 ```
 VITE_SUPABASE_URL=https://<project>.supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY=<anon key>     # public by design
-SITE_ORIGIN=https://votre-domaine.fr         # REQUIRED — origin de production
+SITE_ORIGIN=https://cosmooss.com             # REQUIRED — origin de production
 VITE_SUPABASE_PROJECT_ID=<project ref>       # optional
 VITE_SENTRY_DSN=                             # optional
 VITE_SENTRY_ENVIRONMENT=production           # optional
@@ -27,9 +27,7 @@ RUN_PRERENDER=true                           # optional — déterministe (défa
 
 `SITE_ORIGIN` est la **single source of truth** du SEO de production : elle pilote
 `sitemap.xml`, `robots.txt` et les canonicals/og:url des fiches produit prérendues.
-Le domaine final n'est pas encore acheté → utiliser le placeholder documenté
-(`https://kissariya-cosmetiques.com`, cf. `.env.example`) et le remplacer plus tard
-sans toucher au code.
+Le domaine de production est `https://cosmooss.com` (cf. `.env.example`).
 
 ---
 
@@ -50,7 +48,7 @@ docker compose up -d --build
 docker build `
   --build-arg VITE_SUPABASE_URL=https://<project>.supabase.co `
   --build-arg VITE_SUPABASE_PUBLISHABLE_KEY=<anon key> `
-  --build-arg SITE_ORIGIN=https://votre-domaine.fr `
+  --build-arg SITE_ORIGIN=https://cosmooss.com `
   -t my-ecommerce-frontend .
 ```
 
@@ -72,7 +70,7 @@ only for cache-only CI/test images.
 ## 3. Run (any host)
 
 ```powershell
-docker run -d --name kissariya-web -p 8080:80 my-ecommerce-frontend
+docker run -d --name cosmooss-web -p 8080:80 my-ecommerce-frontend
 ```
 
 Nginx listens on :80 inside the container; map any external port.
@@ -118,7 +116,7 @@ server {
     ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
 
     location / {
-        proxy_pass http://127.0.0.1:8080;   # the kissariya-web container
+        proxy_pass http://127.0.0.1:8080;   # the cosmooss-web container
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
@@ -139,11 +137,11 @@ server {
 docker compose up -d --build
 
 # rollback to previous image
-docker stop kissariya-web && docker rm kissariya-web
-docker run -d --name kissariya-web -p 8080:80 <previous-image-tag>
+docker stop cosmooss-web && docker rm cosmooss-web
+docker run -d --name cosmooss-web -p 8080:80 <previous-image-tag>
 ```
 
-CI/CD tip: build once with a tag (e.g. `kissariya-web:$GIT_SHA`), push to a
+CI/CD tip: build once with a tag (e.g. `cosmooss-web:$GIT_SHA`), push to a
 registry, deploy by tag. `index.html` is never cached (`no-store`) so a new
 deploy's asset hashes are picked up immediately even if the HTML was cached
 by an intermediate proxy for a short window.

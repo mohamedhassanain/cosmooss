@@ -156,7 +156,7 @@ export default function AdminProductForm() {
         try {
           const res = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&accept-language=fr`,
-            { headers: { 'User-Agent': 'KissariyaCosmetics/1.0' } }
+          { headers: { 'User-Agent': 'Cosmooss/1.0' } }
           );
           const data = await res.json();
           const address = data.address || {};

@@ -177,7 +177,7 @@ export default function ProduitDetail() {
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center gap-4">
           <Link to="/" className="flex items-center gap-2 shrink-0">
             <Logo className="h-8 w-8" />
-            <span className="font-display font-bold text-lg text-pink-700 hidden sm:block">{settings?.site_name || 'Kissariya Cosmétiques'}</span>
+        <span className="font-display font-bold text-lg text-pink-700 hidden sm:block">{settings?.site_name || 'Cosmooss'}</span>
           </Link>
           <Link to="/produits" className="text-pink-500 hover:text-pink-700 text-sm ml-auto">← Tous les produits</Link>
         </div>

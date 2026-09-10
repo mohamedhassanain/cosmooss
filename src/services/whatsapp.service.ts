@@ -74,7 +74,7 @@ export async function openWhatsAppOrder(product: Product): Promise<void> {
     }
 
     const productUrl = `${globalThis.location.origin}/produit/${product.slug}`;
-    const message = `${productUrl}\n\nBonjour! J'ai vu votre produit *${product.name}* sur Kissariya Cosmétiques. Est-il toujours disponible?`;
+    const message = `${productUrl}\n\nBonjour! J'ai vu votre produit *${product.name}* sur Cosmooss. Est-il toujours disponible?`;
     const whatsappUrl = `https://wa.me/${formatWhatsAppNumber(whatsappNumber)}?text=${encodeURIComponent(message)}`;
     globalThis.open(whatsappUrl, '_blank');
   } finally {

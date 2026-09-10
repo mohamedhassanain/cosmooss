@@ -101,7 +101,7 @@ export default function Produits() {
       ? `${categoryForSeo.name} — Produits cosmétiques au Maroc`
       : 'Produits cosmétiques au Maroc',
     description: categoryForSeo?.description
-      ? `${categoryForSeo.description} Achetez en ligne chez Kissariya Cosmétiques au Maroc.`
+      ? `${categoryForSeo.description} Achetez en ligne chez Cosmooss au Maroc.`
       : 'Tous nos produits cosmétiques naturels et bio : soins visage, corps, cheveux, maquillage et parfums. Achetez en ligne au Maroc.',
     path: canonicalPath,
     index: !isFilteredUrl,
@@ -141,7 +141,7 @@ export default function Produits() {
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
           <Link to="/" className="flex items-center gap-2 shrink-0">
             <Logo className="h-8 w-8" />
-            <span className="font-display font-bold text-lg text-pink-700 hidden sm:block">Kissariya Cosmétiques</span>
+            <span className="font-display font-bold text-lg text-pink-700 hidden sm:block">Cosmooss</span>
           </Link>
           <div className="flex-1 max-w-md relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-pink-300" />

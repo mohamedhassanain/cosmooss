@@ -1,8 +1,8 @@
 # =====================================================================
-# KISSARIYA COSMÉTIQUES — docker compose SCALE (multi-replica, PROD)
+# COSMOOSS — docker compose SCALE (multi-replica, PROD)
 # ---------------------------------------------------------------------
 # Same immutable stateless image served by N identical containers.
-# Three replicas (web1, web2, web3) reuse the same `kissariya-web:latest`
+# Three replicas (web1, web2, web3) reuse the same `cosmooss-web:latest`
 # image (build args identical to docker-compose.yml). No host volumes,
 # no server state — each replica is interchangeable.
 #
@@ -34,9 +34,9 @@ x-web-args: &web-args
 
 services:
   web1:
-    image: kissariya-web:latest
+    image: cosmooss-web:latest
     build: *web-args
-    container_name: kissariya-web1
+    container_name: cosmooss-web1
     ports:
       - "8081:80"
     restart: unless-stopped
@@ -55,9 +55,9 @@ services:
         max-file: "3"
 
   web2:
-    image: kissariya-web:latest
+    image: cosmooss-web:latest
     build: *web-args
-    container_name: kissariya-web2
+    container_name: cosmooss-web2
     ports:
       - "8082:80"
     restart: unless-stopped
@@ -76,9 +76,9 @@ services:
         max-file: "3"
 
   web3:
-    image: kissariya-web:latest
+    image: cosmooss-web:latest
     build: *web-args
-    container_name: kissariya-web3
+    container_name: cosmooss-web3
     ports:
       - "8083:80"
     restart: unless-stopped

@@ -8,17 +8,16 @@
  * SITE_ORIGIN centralisée :
  *   * Runtime navigateur → `window.location.origin` (le vrai domaine) — les
  *     canonicals/og:url sont donc TOUJOURS cohérents avec l'URL servie.
- *   * Environnements sans DOM (tests, outils de build) → `DEFAULT_SITE_ORIGIN`,
- *     le placeholder DOCUMENTÉ (identique à .env.example). Le domaine FINAL
- *     n'est pas acheté : aucune valeur « finale » n'est codée en dur.
+ *   * Environnements sans DOM (tests, outils de build) → `DEFAULT_SITE_ORIGIN`
+ *     (origine de production, identique à .env.example).
  *   * Sitemap / robots.txt / fiches prérendues → `SITE_ORIGIN` de
  *     scripts/prerender-products.mjs (variable d'environnement au build).
  */
 
-export const DEFAULT_SITE_NAME = 'Kissariya Cosmétiques';
+export const DEFAULT_SITE_NAME = 'Cosmooss';
 
-/** Placeholder DOCUMENTÉ tant que le domaine final n'est pas configuré (voir .env.example). */
-export const DEFAULT_SITE_ORIGIN = 'https://kissariya-cosmetiques.com';
+/** Domaine de production (source unique de vérité SEO — voir .env.example). */
+export const DEFAULT_SITE_ORIGIN = 'https://cosmooss.com';
 
 /** Origin courante (au runtime → le domaine de production une fois déployé). */
 export function getSiteOrigin(): string {

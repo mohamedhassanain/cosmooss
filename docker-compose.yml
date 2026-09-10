@@ -1,5 +1,5 @@
 # =====================================================================
-# KISSARIYA COSMÉTIQUES — docker compose (production, frontend only)
+# COSMOOSS — docker compose (production, frontend only)
 # ---------------------------------------------------------------------
 # Single service: the Nginx web container. NO database, NO redis,
 # NO backend, NO api. Supabase remains the only backend.

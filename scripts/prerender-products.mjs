@@ -22,9 +22,8 @@
  *   SITE_ORIGIN=https://domaine-final.com \
  *   npm run prerender
  *
- * SITE_ORIGIN est OBLIGATOIRE en production (le script refuse un domaine
- * placeholder). En local, un placeholder documenté est accepté (voir
- * README/.env.example). Aucun domaine final en dur dans ce fichier.
+ * SITE_ORIGIN est OBLIGATOIRE (sitemap/canonicals/robots). À défaut, ce
+ * script retombe sur l'origine de production documentée dans .env.example.
  */
 import { createClient } from '@supabase/supabase-js';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -40,22 +39,21 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 
 /**
  * Origin de production, SDCF (single source of truth) pour sitemap,
- * canonicals et OG des pages prérendues. Placeholder documenté tant que le
- * domaine final n'est pas acheté — JAMAIS un domaine prétendu « final ».
+ * canonicals et OG des pages prérendues.
  */
-const DEFAULT_SITE_ORIGIN = 'https://kissariya-cosmetiques.com';
+const DEFAULT_SITE_ORIGIN = 'https://cosmooss.com';
 
 const rawOrigin = process.env.SITE_ORIGIN || '';
 const ORIGIN = rawOrigin.replace(/\/+$/, '');
 if (!ORIGIN) {
   console.error(
     '❌ SITE_ORIGIN est requis (ex: https://votre-domaine.com). ' +
-    'Placeholder local documenté : ' + DEFAULT_SITE_ORIGIN
+    'Valeur par défaut : ' + DEFAULT_SITE_ORIGIN
   );
   process.exit(1);
 }
 
-const SITE_NAME = 'Kissariya Cosmétiques';
+const SITE_NAME = 'Cosmooss';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -276,7 +274,7 @@ function buildSitemap({ categories, products, generatedAt }) {
  */
 function buildRobotsTxt() {
   return [
-    `# Kissariya Cosmétiques — robots.txt (généré par npm run prerender)`,
+    `# Cosmooss — robots.txt (généré par npm run prerender)`,
     `# Origin configurée via SITE_ORIGIN : ${ORIGIN}`,
     '',
     'User-agent: *',

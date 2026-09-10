@@ -9,7 +9,7 @@ import { test, expect } from '@playwright/test';
 
 test('la page d’accueil rend le header, la navigation et le footer', async ({ page }) => {
   await page.goto('/');
-  await expect(page).toHaveTitle(/Kissariya|Cosmétiqu/);
+  await expect(page).toHaveTitle(/Cosmooss|Cosmétiqu/);
   await expect(page.locator('header')).toBeVisible();
   await expect(page.locator('footer')).toBeVisible();
 });

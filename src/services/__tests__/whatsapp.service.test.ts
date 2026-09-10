@@ -28,7 +28,7 @@ function makeProduct() {
 beforeEach(() => {
   vi.clearAllMocks();
   // L'URL du produit utilise globalThis.location.origin
-  vi.stubGlobal('location', { origin: 'https://kissariya.example' });
+    vi.stubGlobal('location', { origin: 'https://cosmooss.example' });
   vi.spyOn(globalThis, 'open').mockImplementation(() => null);
 });
 
@@ -83,7 +83,7 @@ describe('whatsapp.service', () => {
   describe('getProductShareData', () => {
     it('génère l’URL de partage du produit', () => {
       const data = getProductShareData(makeProduct());
-      expect(data.url).toBe('https://kissariya.example/produit/creme-visage');
+    expect(data.url).toBe('https://cosmooss.example/produit/creme-visage');
       expect(data.title).toBe('Crème Visage');
     });
   });

@@ -1,4 +1,4 @@
-# Kissariya Cosmétiques — robots.txt
+# Cosmooss — robots.txt
 # TEMPLATE DE DÉVELOPPEMENT (placeholder) : en production, `npm run prerender`
 # (exécuté automatiquement par le build Docker) génère dist/robots.txt avec
 # SITE_ORIGIN — voir .env.example. Ce fichier n'est pas déployé tel quel.
@@ -38,5 +38,5 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-# Sitemap — domaine de production final (placeholder tant que le domaine n'est pas défini).
-Sitemap: https://kissariya-cosmetiques.com/sitemap.xml
+# Sitemap — domaine de production.
+Sitemap: https://cosmooss.com/sitemap.xml

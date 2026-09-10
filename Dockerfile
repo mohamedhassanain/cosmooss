@@ -1,5 +1,5 @@
 # =====================================================================
-# KISSARIYA COSMÉTIQUES — production Dockerfile (frontend only)
+# COSMOOSS — production Dockerfile (frontend only)
 # ---------------------------------------------------------------------
 # Architecture stays: browser → Cloudflare → Docker/Nginx → Supabase.
 # Nginx ONLY serves the React/Vite static build. No backend is created.

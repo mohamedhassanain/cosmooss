@@ -1,4 +1,4 @@
-# Checklist de déploiement production — Kissariya Cosmétiques
+# Checklist de déploiement production — Cosmooss
 
 > À cocher **avant** toute mise en ligne publique du site.
 

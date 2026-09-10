@@ -6,7 +6,7 @@ interface LogoProps {
   title?: string;
 }
 
-function InlineSVG({ className = 'h-16 w-16', title = 'Kissariya Cosmétiques' }: Readonly<{ className?: string; title?: string }>) {
+function InlineSVG({ className = 'h-16 w-16', title = 'Cosmooss' }: Readonly<{ className?: string; title?: string }>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ function InlineSVG({ className = 'h-16 w-16', title = 'Kissariya Cosmétiques' }
   );
 }
 
-export default function Logo({ className = 'h-16 w-16', title = 'Kissariya Cosmétiques' }: Readonly<LogoProps>) {
+export default function Logo({ className = 'h-16 w-16', title = 'Cosmooss' }: Readonly<LogoProps>) {
   const { settings } = useSiteSettings();
 
   if (settings?.logo_url) {

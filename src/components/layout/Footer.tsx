@@ -71,7 +71,7 @@ export function Footer() {
             <div>
               <Link to="/" className="flex items-center gap-2 mb-4">
                 <Logo className="h-8 w-8" />
-                <span className="font-display font-bold text-lg text-white">Kissariya Cosmétiques</span>
+                <span className="font-display font-bold text-lg text-white">Cosmooss</span>
               </Link>
               <ul className="space-y-2 text-sm">
                 <li><Link to="/" className="hover:text-white transition-colors">Accueil</Link></li>
@@ -113,7 +113,7 @@ export function Footer() {
                   <MessageCircle className="h-4 w-4 text-white" />
                 </button>
               </div>
-              <p className="text-xs text-gray-500">© 2026 Kissariya Cosmétiques</p>
+              <p className="text-xs text-gray-500">© 2026 Cosmooss</p>
             </div>
           </div>
         </div>

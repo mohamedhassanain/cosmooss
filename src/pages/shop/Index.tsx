@@ -83,7 +83,7 @@ export default function Index() {
           <Link to="/" className="flex items-center gap-2 shrink-0">
             <Logo className="h-8 w-8" />
             <span className="font-display font-bold text-xl text-pink-700 hidden sm:block">
-              {settings?.site_name || 'Kissariya Cosmétiques'}
+              {settings?.site_name || 'Cosmooss'}
             </span>
           </Link>
 

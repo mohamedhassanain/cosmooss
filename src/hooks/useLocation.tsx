@@ -10,7 +10,7 @@ export function useLocation() {
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
         {
           headers: {
-            'User-Agent': 'Kissariya/1.0'
+            'User-Agent': 'Cosmooss/1.0'
           }
         }
       );

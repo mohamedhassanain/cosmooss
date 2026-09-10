@@ -35,7 +35,7 @@ function toHex(bytes: Uint8Array): string {
 export async function hashIp(ip: string, secret?: string): Promise<string> {
   const data = new TextEncoder().encode(ip);
   if (secret) {
-    const keyData = new TextEncoder().encode(`kissariya-rl:${secret}`);
+    const keyData = new TextEncoder().encode(`cosmooss-rl:${secret}`);
     const cryptoKey = await crypto.subtle.importKey(
       "raw",
       keyData,
